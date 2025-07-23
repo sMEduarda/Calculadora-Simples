@@ -1,0 +1,84 @@
+import tkinter as tk
+from tkinter import messagebox
+
+# Funções de operações
+def somar():
+    try:
+        resultado = float(entrada1.get()) + float(entrada2.get())
+        mostrar_resultado(resultado)
+    except ValueError:
+        mostrar_erro()
+
+def subtrair():
+    try:
+        resultado = float(entrada1.get()) - float(entrada2.get())
+        mostrar_resultado(resultado)
+    except ValueError:
+        mostrar_erro()
+
+def multiplicar():
+    try:
+        resultado = float(entrada1.get()) * float(entrada2.get())
+        mostrar_resultado(resultado)
+    except ValueError:
+        mostrar_erro()
+
+def dividir():
+    try:
+        b = float(entrada2.get())
+        if b == 0:
+            resultado_label.config(text="Erro: divisão por zero", fg="red")
+        else:
+            resultado = float(entrada1.get()) / b
+            mostrar_resultado(resultado)
+    except ValueError:
+        mostrar_erro()
+
+def mostrar_resultado(valor):
+    resultado_label.config(text=f"Resultado: {valor}", fg="red")
+
+def mostrar_erro():
+    messagebox.showerror("Erro", "Digite apenas números válidos!")
+
+def sair():
+    janela.destroy()
+
+# Criando janela principal
+janela = tk.Tk()
+janela.title("Calculadora Tkinter")
+janela.geometry("300x400")
+janela.configure(bg="#f0f0f0")
+janela.resizable(False, False)
+
+# Centralizando elementos com padding
+tk.Label(janela, text="Digite dois números:", bg="#f0f0f0", font=("Arial", 12)).pack(pady=10)
+
+entrada1 = tk.Entry(janela, font=("Arial", 12))
+entrada1.pack(pady=5)
+
+entrada2 = tk.Entry(janela, font=("Arial", 12))
+entrada2.pack(pady=5)
+
+# Botões de operação com cor
+botao_somar = tk.Button(janela, text="Somar", bg="#4CAF50", fg="white", width=15, command=somar)
+botao_somar.pack(pady=5)
+
+botao_subtrair = tk.Button(janela, text="Subtrair", bg="#2196F3", fg="white", width=15, command=subtrair)
+botao_subtrair.pack(pady=5)
+
+botao_multiplicar = tk.Button(janela, text="Multiplicar", bg="#FF9800", fg="white", width=15, command=multiplicar)
+botao_multiplicar.pack(pady=5)
+
+botao_dividir = tk.Button(janela, text="Dividir", bg="#9C27B0", fg="white", width=15, command=dividir)
+botao_dividir.pack(pady=5)
+
+# Resultado em vermelho
+resultado_label = tk.Label(janela, text="Resultado:", font=("Arial", 14), fg="red", bg="#f0f0f0")
+resultado_label.pack(pady=20)
+
+# Botão de sair
+botao_sair = tk.Button(janela, text="Sair", bg="#f44336", fg="white", width=15, command=sair)
+botao_sair.pack(pady=10)
+
+# Iniciar interface
+janela.mainloop()
